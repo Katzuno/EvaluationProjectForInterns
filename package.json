@@ -25,6 +25,8 @@
   "homepage": "https://github.com/Katzuno/InternShip-Evaluation#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9",
+    "supervisor": "^0.12.0"
   }
 }
