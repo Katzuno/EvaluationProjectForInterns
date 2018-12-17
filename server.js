@@ -4,6 +4,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var dotenv = require('dotenv').config();
 var mysql = require('mysql');
 var util = require('util');
+var ejs = require('ejs');
 
 var app = express();
 
@@ -13,6 +14,8 @@ const pass = process.env.PASSWORD;
 const db = process.env.DATABASE;
 
 app.use(express.static('public'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
 
 var dbEngine = mysql.createConnection({
     host: server_ip,
@@ -47,7 +50,8 @@ async function dbOperation(query_string)
 }
 
 app.get('/', function (req, res) {
-    res.sendFile( public_html + "index.html" );
+    field_test_readonly = "readonly";
+    ejs.render( public_html + "index.html", {test_readonly:field_test_readonly});
  });
 
  // MODEL SELECT DB
