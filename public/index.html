@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" type = "text/css">
+
+    <title>Proiect forma softone InternShip!</title>
+  </head>
+  <body>
+    <h1>Forma IQFIX</h1>
+    <div class = "row">
+        <form method = "POST" class = "col-md-3" name = "status">
+            <div class="form-group col-md-6">
+                <label for="cod_produs">Status</label>
+                <input type="number" class="form-control" id="status" name = "status" placeholder="1">
+            </div>
+        </form>
+    </div>
+    <div class = "row">
+    <form method = "POST" class = "col-md-6" name = "pas1" id = "pas1">
+        <h2> 1. Diagnosticare </h2>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="cod_produs">Cod Produs</label>
+            <input type="text" class="form-control" id="cod_produs" name = "cod_produs" placeholder="COD PRODUS">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="nume_produs">Nume Produs</label>
+            <input type="text" class="form-control" id="nume_produs" name = "nume_produs" placeholder="PRODUS">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="imei">IMEI</label>
+          <input type="text" class="form-control" id="imei" name = "imei" placeholder="IMEI">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="cod_tehnician">Cod Tehnician</label>
+              <input type="text" class="form-control" id="cod_tehnician" name = "cod_tehnician" placeholder="COD TEHNICIAN">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="nume_tehnician">Nume Tehnician</label>
+              <input type="text" class="form-control" id="nume_tehnician" name = "nume_tehnician" placeholder="TEHNICIAN">
+            </div>
+        </div>
+        <div class = "form-row">
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="reparabil" name = "reparabil">
+                    <label class="form-check-label" for="reparabil">
+                    Poate fi reparat?
+                    </label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="apa" name = "apa">
+                    <label class="form-check-label" for="apa">
+                    Contact cu apa
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="cod_tehnician">Adaugat la data:</label>
+                <input type="date" class="form-control" id="date_added" name = "date_added" placeholder="DATA ADUSA DIN BAZA DE DATE" readonly>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="nume_tehnician">END DATE</label>
+                <input type="text" class="form-control" id="date_end" name = "date_end" placeholder="Data completata">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" name = "diagnosticare">Diagnosticare</button>
+      </form>
+
+
+      <form method = "POST" class = "col-md-6" name = "pas2" id = "pas2">
+            <h2> 2. Comunicare cost client </h2>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="valoare">Valoare</label>
+                <input type="number" class="form-control" id="valoare" name = "valoare" placeholder="VALOARE TOTALA">
+              </div>
+              <div class="form-group">
+                    <label for="comunicat">Comunicat</label>
+                    <select class="form-control" id="comunicat" name = "comunicat">
+                      <option value = "sms">SMS</option>
+                      <option value = "email">EMAIL</option>
+                    </select>
+                  </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nume_tehnician">END DATE</label>
+                    <input type="text" class="form-control" id="date_end" name = "date_end" placeholder="Data completata">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" name="comunicare-cost">Comunicare cost client</button>
+        </form>
+        </div>
+
+        <div class = "row">
+                <form method = "POST" class = "col-md-6" name = "pas3" id = "pas3" action = "/accept-cost">
+                        <h2> 3. Acceptare cost </h2>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="confirmat" name = "confirmat">
+                                    <label class="form-check-label" for="confirmat">
+                                        Confirmat
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="form-group col-md-6">
+                                    <label for="date_end">END DATE</label>
+                                    <input type="date" class="form-control" id="date_end" name = "date_end" placeholder="End date">
+                                </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="accept-cost">Acceptare cost</button>
+                </form>
+
+                <form method = "POST" class = "col-md-6" name = "pas5" id = "pas5">
+                        <h2> 5. Comunicare reparatie </h2>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="form-group col-md-12">
+                                    <label for="date_end">END DATE</label>
+                                        <input type="date" class="form-control" id="date_end" name = "date_end" placeholder="End date">
+                                    </div>
+                            </div>
+                        </div>   
+                        <button type="submit" class="btn btn-primary col-md-6" name="comunicare-reparatie">Comunicare reparatie</button>
+                </form>
+        </div>
+        toate elementele precompletate se vor lua din db<br/>
+        <div class = "row" style = "margin: 5px;">
+                <h2> 4. Piese de schimb </h2>
+                <form method = "POST" class = "col-md-12" name = "pas4" id = "pas4"> 
+                <table class="table table-dark" id = "piese_schimb">
+                        <thead>
+                            <th> Cod </th>
+                            <th> Nume </th>
+                            <th> Cantitate </th>
+                            <th> Pret </th>
+                            <th> Valoare neta </th>
+                            <th> Data comenzii </th>
+                            <th> Data livrarii </th>
+                        </thead>
+                        <tbody>
+                            <tr scope = "row">
+                                <td contenteditable="true"> MR.0000000 </td>
+                                <td contenteditable="true"> Telefon </td>
+                                <td contenteditable="true"> 2 </td>
+                                <td contenteditable="true"> 23 </td>
+                                <td contenteditable="true"> 46 </td>
+                                <td contenteditable="true"> 06.12.2018 </td>
+                                <td contenteditable="true"> 16.12.2018 </td>
+                            </tr>
+
+                            <tr scope = "row">
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                            </tr>
+
+                            <tr scope = "row">
+                                <td contenteditable="true">  </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                            </tr>
+                            <tr scope = "row">
+                                <td contenteditable="true">  </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                                <td contenteditable="true"> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                        <button type="submit" class="btn btn-primary" name="update_piese">Update tabel piese</button>
+                        <button type="submit" class="btn btn-primary" name="adauga_linie_noua">Adauga linie noua (empty) in tabel</button>
+                </form>
+        </div>
+  </body>
+</html>

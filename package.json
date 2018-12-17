@@ -1,0 +1,30 @@
+{
+  "name": "proiect_javascript",
+  "version": "1.0.0",
+  "description": "Proiect InternShip Irinel",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Katzuno/InternShip-Evaluation.git"
+  },
+  "keywords": [
+    "Erik",
+    "project",
+    "for",
+    "interns"
+  ],
+  "author": "Erik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Katzuno/InternShip-Evaluation/issues"
+  },
+  "homepage": "https://github.com/Katzuno/InternShip-Evaluation#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
