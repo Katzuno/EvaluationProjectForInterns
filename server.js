@@ -116,5 +116,5 @@ app.post('/accept-cost', urlencodedParser, function (req, res) {
     var host = server.address().address
     var port = server.address().port
     
-    console.log("NodeJS app listening at http://142.93.138.151/");
+    console.log("NodeJS app running on http://142.93.138.151/");
  });
