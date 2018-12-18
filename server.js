@@ -112,17 +112,20 @@ app.post('/accept-cost', urlencodedParser, function (req, res) {
     //res.send('Hello POST');
     res.send(response);
 });
+// cod scris de mine ->
 app.post('/diagnosticare', urlencodedParser, function (req, res) {
     var nume = req.body.nume_produs;
+    var immei=req.body.imei;
     response = {
-        nume:req.body.nume_produs
-
+        nume:req.body.nume_produs,
+        immei:req.body.imei
     };
 
     console.log("Got a POST request for the homepage");
     //res.send('Hello POST');
     res.send(response);
 });
+
 
 
 
