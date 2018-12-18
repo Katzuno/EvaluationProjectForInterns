@@ -4,11 +4,14 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var app = express();
 
+app.set('view engine', 'ejs');
+
 app.use(express.static('public'));
-public_html = __dirname + "/public/";
+public_html = __dirname + "/views/";
 
 app.get('/', function (req, res) {
-    res.sendFile( public_html + "index.html" );
+    field_test_status = "readonly";
+    res.render('index', {test_readonly:field_test_status});
  });
 
  // MAI SUS NU SCHIMBI NIMIC
