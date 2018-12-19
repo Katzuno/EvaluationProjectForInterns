@@ -34,7 +34,6 @@ dbEngine.connect(function(err) {
 
   var query = util.promisify(dbEngine.query).bind(dbEngine);
 
-  // nu te atingi de ea
 async function dbOperation(query_string)
 {
     try {
@@ -50,13 +49,11 @@ async function dbOperation(query_string)
 
 app.get('/', function (req, res) {
     field_test_readonly = "readonly";
-    
     res.render('index', {test_readonly:field_test_readonly});
  });
 
  // MODEL SELECT DB
  app.get('/select-documents', function(req, res)    {
-
     documents_promise = dbOperation("SELECT * FROM documente");
     documents_promise.then(function(result) {
                                 console.log("[RESULT] ", result);
@@ -79,7 +76,7 @@ app.get('/', function (req, res) {
                         );
  });
 
- // MODEL INSERT / UPDATE DB - Update e similar, dar difera query-ul SQL
+ // MODEL INSERT DB - Update e similar, dar difera query-ul SQL
  app.post('/insert-document', function(req, res)    {
     sql = "INSERT INTO documente (document_number, document_name) VALUES ('D.002', 'Reparatie iPhone XS')";  
         try
@@ -105,53 +102,12 @@ app.get('/', function (req, res) {
 app.post('/accept-cost', urlencodedParser, function (req, res) {
     response = {
         confirmat:req.body.confirmat,//Preiau atributul name din input
-        date:req.body.date_end
-    }
-
-    console.log("Got a POST request for the homepage");
-    //res.send('Hello POST');
-    res.send(response);
-});
-// cod scris de mine ->
-/*app.post('/diagnosticare', urlencodedParser, function (req, res) {
-    var nume = req.body.nume_produs;
-    var immei=req.body.imei;
-    response = {
-        nume:req.body.nume_produs,
-        immei:req.body.imei
-    };
-
-    console.log("Got a POST request for the homepage");
-    //res.send('Hello POST');
-    res.send(response);
-}); */
-app.post('/diagnosticare', urlencodedParser, function (req, res) {
-    var nume = req.body.nume_produs;
-    var immei = req.body.imei;
-    date = req.body.date_end;
-    
-    response = {
-        nume:req.body.nume_produs,
-        immei:req.body.imei,
-        date:req.body.date_end
+        last_name:req.body.date_end
     }
     console.log("Got a POST request for the homepage");
     //res.send('Hello POST');
     res.send(response);
 });
-app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
-    var pret = req.body.valoare;
-    
-    response = {
-        pret:req.body.valoare
-        
-    }
-    console.log("Got a POST request for the homepage");
-    //res.send('Hello POST');
-    res.send(response);
-});
-
-
 
 
 
@@ -160,5 +116,5 @@ app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
     var host = server.address().address
     var port = server.address().port
     
-    console.log("NodeJS app running on http://142.93.138.151/");
+    console.log("NodeJS app listening at http://142.93.138.151/");
  });
