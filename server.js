@@ -113,31 +113,58 @@ app.post('/accept-cost', urlencodedParser, function (req, res) {
     res.send(response);
 });
 // cod scris de mine ->
-/*app.post('/diagnosticare', urlencodedParser, function (req, res) {
-    var nume = req.body.nume_produs;
-    var immei=req.body.imei;
-    response = {
-        nume:req.body.nume_produs,
-        immei:req.body.imei
-    };
 
-    console.log("Got a POST request for the homepage");
-    //res.send('Hello POST');
-    res.send(response);
-}); */
 app.post('/diagnosticare', urlencodedParser, function (req, res) {
     var nume = req.body.nume_produs;
-    var immei = req.body.imei;
+    var imei = req.body.imei;
+    var cod_produs=req.body.cod_produs;
     date = req.body.date_end;
+
     
     response = {
         nume:req.body.nume_produs,
-        immei:req.body.imei,
+        imei:req.body.imei,
         date:req.body.date_end
     }
+    
+    
+
+
+    documents_promise = dbOperation("SELECT id,nume, IMEI FROM Cod_Produs WHERE cod_produs='"+cod_produs+"' AND nume='"+nume+ "' AND IMEI='"+ imei+"'" );
+    documents_promise.then(function(result) {
+                                console.log("[RESULT] ", result);
+                                docDetails = result;
+
+                                var nume_out='not exist';
+                                var id_out = "not exist";
+                                var imei_out='not exist';
+                                if (docDetails[0])
+                                {
+                                    id_out = docDetails[0].id;
+                                    nume_out = docDetails[0].nume;
+                                    imei_out = docDetails[0].IMEI;
+                                }
+                                // In response stochezi elementele din rezultatul primit din baza de date
+                                response = 
+                                {
+                                    id_produs:id_out,
+                                    nume:nume_out,
+                                    imei:imei_out
+                                    //nume_document:docDetails[0].document_name
+                                };
+                                
+                                console.log(response);
+                                res.send(response);
+
+                            }, 
+                            function(err) {
+                                console.log(err);
+                            }
+                        );
+
     console.log("Got a POST request for the homepage");
     //res.send('Hello POST');
-    res.send(response);
+
 });
 app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
     var pret = req.body.valoare;
@@ -150,6 +177,7 @@ app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
     //res.send('Hello POST');
     res.send(response);
 });
+
 
 
 
