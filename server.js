@@ -114,7 +114,7 @@ app.post('/accept-cost', urlencodedParser, function (req, res) {
 });
 // cod scris de mine ->
 
-app.post('/diagnosticare', urlencodedParser, function (req, res) {
+/* app.post('/diagnosticare', urlencodedParser, function (req, res) {
     var nume = req.body.nume_produs;
     var imei = req.body.imei;
     var cod_produs=req.body.cod_produs;
@@ -176,7 +176,88 @@ app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
     console.log("Got a POST request for the homepage");
     //res.send('Hello POST');
     res.send(response);
+}); */
+
+//       Noul cod scris de mine
+
+app.post('/diagnosticare', urlencodedParser, function (req, res) {
+    var nume = req.body.nume_produs;
+    var imei = req.body.imei;
+    var test_produs = req.body.cod_produs;//Modificare
+    var date = req.body.date_end;
+    var merge_reparat = req.body.reparabil;
+
+    
+    response = {
+        ID_PRODUS:req.body.cod_produs,//Modificare
+        nume:req.body.nume_produs,
+        imei:req.body.imei,
+        date:req.body.date_end,
+        merge_reparat:req.body.reparabil
+
+    }
+    console.info("PRIMUL RESPONSE");
+    console.info(response);
+    
+    
+
+                                    //("SELECT F.ID_PRODUS, F.DATA_IN, F.DATA_OUT FROM FISA_SERVICE F INNER JOIN PRODUS P ON F.ID_PRODUS =P.ID WHERE ID_PRODUS='"+test_produs+"'AND nume=" );
+    documents_promise = dbOperation("SELECT ID_PRODUS, DATA_OUT, ID_STARE FROM FISA_SERVICE  WHERE ID_PRODUS ='"+test_produs+"'AND DATA_OUT ='"+date+"'AND ID_STARE='"+merge_reparat+"'"  );
+    documents_promise.then(function(result) {
+                                console.log("[RESULT] ", result);
+                                docDetails = result;
+                                var idd_out='noooot exist';
+                                var nume_out='noOaat exist';
+                                //var id_out = "not exist";
+                                //var imei_out='not exist';
+                                var date_out='not exist';
+                                var merge='not exist';
+                                if (docDetails[0])
+                                {
+                                    console.log("A INTRAT IN PRIMUL IF DIN PROMISE THEN " + docDetails[0]);
+                                    idd_out = docDetails[0].ID_PRODUS; // Modificare
+                                    nume_out = docDetails[0].nume;
+                                    //imei_out = docDetails[0].IMEI;
+                                    date_out=docDetails[0].DATE_OUT;
+                                    merge=docDetails[0].ID_STARE;
+                                }
+                                // In response stochezi elementele din rezultatul primit din baza de date
+                                response = 
+                                {
+                                    id_produSs:idd_out,//Modificare
+                                    nume:nume_out,
+                                    //imei:imei_out
+                                    //nume_document:docDetails[0].document_name
+                                    date_ouut:date_out,
+                                    merge_reparat:merge
+                                };
+                                
+                                console.log("RESPONSE DIN THEN");
+                                console.log(response);
+                                res.send(response);
+
+                            }, 
+                            function(err) {
+                                console.log(err);
+                            }
+                        );
+
+    console.log("Got a POST request for the homepage");
+    //res.send('Hello POST');
+
 });
+app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
+    var pret = req.body.valoare;
+    
+    response = {
+        pret:req.body.valoare
+        
+    }
+    console.log("Got a POST request for the homepage");
+    //res.send('Hello POST');
+    res.send(response);
+});
+
 
 
 
