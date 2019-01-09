@@ -178,63 +178,130 @@ app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
     res.send(response);
 }); */
 
-//       Noul cod scris de mine
+     //  Noul cod scris de mine
 
 app.post('/diagnosticare', urlencodedParser, function (req, res) {
-    var nume = req.body.nume_produs;
-    var imei = req.body.imei;
+    //var nume = req.body.nume_produs;
+    //var imei = req.body.imei;
     var test_produs = req.body.cod_produs;//Modificare
-    var date = req.body.date_end;
-    var merge_reparat = req.body.reparabil;
+    //var date = req.body.date_end;
+   // var merge_reparat = req.body.reparabil;
 
-    
+
     response = {
-        ID_PRODUS:req.body.cod_produs,//Modificare
-        nume:req.body.nume_produs,
-        imei:req.body.imei,
+        ID_PRODUS:req.body.cod_produs, //Modificare
+        //nume:req.body.nume_produs
+        /*imei:req.body.imei,
         date:req.body.date_end,
         merge_reparat:req.body.reparabil
-
+        */
     }
     console.info("PRIMUL RESPONSE");
     console.info(response);
-    
-    
 
-                                    //("SELECT F.ID_PRODUS, F.DATA_IN, F.DATA_OUT FROM FISA_SERVICE F INNER JOIN PRODUS P ON F.ID_PRODUS =P.ID WHERE ID_PRODUS='"+test_produs+"'AND nume=" );
-    documents_promise = dbOperation("SELECT ID_PRODUS, DATA_OUT, ID_STARE FROM FISA_SERVICE  WHERE ID_PRODUS ='"+test_produs+"'AND DATA_OUT ='"+date+"'AND ID_STARE='"+merge_reparat+"'"  );
+
+
+    documents_promise = dbOperation("SELECT F.ID_PRODUS, P.NUME, U.NUME AS NUME2, S.Stare FROM FISA_SERVICE F INNER JOIN PRODUS P ON F.ID_PRODUS = P.ID INNER JOIN USER U ON U.ID=F.ID_USER INNER JOIN STARE S ON S.ID=F.ID_STARE WHERE ID_PRODUS='"+test_produs+"'"  );
+    //documents_promise = dbOperation("SELECT ID_PRODUS FROM FISA_SERVICE  WHERE ID_PRODUS ='"+test_produs+"'" );
     documents_promise.then(function(result) {
                                 console.log("[RESULT] ", result);
                                 docDetails = result;
+
+                                
+
+                                //linia 1
                                 var idd_out='noooot exist';
-                                var nume_out='noOaat exist';
-                                //var id_out = "not exist";
+                                var nume_out='noOt exist';
+                                var nume_user1="not exist";
+                                
+                                //linia 2
+                                var id_out2 = "not exist";
+                                var nume_out2="not exist";
+                                var nume_user2="not exist";
+                                // linia 3
+                               /* var id_out3='not exist';
+                                var nume_out3='noOt exist';
+                                var nume_user3="not exist";
+                                
+                                //linia 4
+                                var id_out4='not exist';
+                                var nume_out4='noOt exist';
+                                var nume_user4="not exist";*/
+
+                                
+
+                               
+
                                 //var imei_out='not exist';
-                                var date_out='not exist';
-                                var merge='not exist';
+                                //var date_out='not exist';
+                                //var merge='not exist';
                                 if (docDetails[0])
                                 {
                                     console.log("A INTRAT IN PRIMUL IF DIN PROMISE THEN " + docDetails[0]);
+                                     
+                                
+                               /*
+                                var total = [];
+
+                                for (var i = 0; i < docDetails.length; i++)
+                                {
+                                    row = 
+                                    {
+                                        test1: docDetails[i].ID_PRODUS,
+                                        test2: docDetails[i].NUME
+                                    }
+                                    total.push(row);
+
+                            }
+                            
                                     idd_out = docDetails[0].ID_PRODUS; // Modificare
-                                    nume_out = docDetails[0].nume;
+                                    nume_out = docDetails[0].NUME;
+                                    nume_user1 = docDetails[0].NUME2;
+
+                                    id_out2 =  docDetails[1].ID_PRODUS;
+                                    nume_out2 = docDetails[1].NUME;
+                                    nume_user2 = docDetails[1].NUME2;
+
+                                    id_out3 = docDetails[2].ID_PRODUS; // Modificare
+                                    nume_out3 = docDetails[2].NUME;
+                                    nume_user3 = docDetails[2].NUME3;
+
+                                    id_out4 = docDetails[3].ID_PRODUS; // Modificare
+                                    nume_out4 = docDetails[3].NUME;
+                                    nume_user4 = docDetails[3].Stare;*/
                                     //imei_out = docDetails[0].IMEI;
-                                    date_out=docDetails[0].DATE_OUT;
-                                    merge=docDetails[0].ID_STARE;
+                                    //date_out=docDetails[0].DATE_OUT;
+                                    //merge=docDetails[0].ID_STARE;
                                 }
                                 // In response stochezi elementele din rezultatul primit din baza de date
                                 response = 
-                                {
-                                    id_produSs:idd_out,//Modificare
-                                    nume:nume_out,
+                                {/*
+                                    id_produs1:idd_out,//Modificare
+                                    nume1:nume_out,
+                                    user1:nume_user1,
+
+                                    id_produs2:id_out2,//Modificare
+                                    nume2:nume_out2,
+                                    user2:nume_user2,
+
+                                    id_produs3:id_out3,//Modificare
+                                    nume3:nume_out3,
+                                    user3:nume_user3,
+
+                                    id_produs4:id_out4,//Modificare
+                                    nume4:nume_out4,
+                                    user4:nume_user4,
                                     //imei:imei_out
                                     //nume_document:docDetails[0].document_name
-                                    date_ouut:date_out,
-                                    merge_reparat:merge
+                                    //date_ouut:date_out,
+                                    //merge_reparat:merge
+
+                                  */  
                                 };
-                                
+
                                 console.log("RESPONSE DIN THEN");
                                 console.log(response);
-                                res.send(response);
+                                res.send(docDetails);
 
                             }, 
                             function(err) {
@@ -246,6 +313,12 @@ app.post('/diagnosticare', urlencodedParser, function (req, res) {
     //res.send('Hello POST');
 
 });
+
+//        O NOUA DIAGNOSTICARE PENTRU ALT TABEL
+
+
+
+
 app.post('/comunicare-cost-client', urlencodedParser, function (req, res) {
     var pret = req.body.valoare;
     
