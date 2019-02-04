@@ -314,8 +314,13 @@ app.post('/diagnosticare', urlencodedParser, function (req, res) {
 
 });
 
-//        O NOUA DIAGNOSTICARE PENTRU ALT TABEL
+// Model afisare
 
+app.get('diagnosticare', function (req, res) {
+   // field_test_readonly = "readonly";
+      aaa = NUME;
+    res.render('nume_produs', {docDetails:aaa});
+ });
 
 
 
